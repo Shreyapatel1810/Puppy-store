@@ -1,0 +1,101 @@
+.puppy-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eee6d9;
+  border-radius: 24px;
+  box-shadow: 0 8px 26px rgb(66 43 26 / 5%);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.puppy-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 34px rgb(66 43 26 / 11%);
+}
+
+.puppy-card-image-wrap {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  background: #eee2d0;
+}
+
+.puppy-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 350ms ease;
+}
+
+.puppy-card:hover .puppy-card-image {
+  transform: scale(1.04);
+}
+
+.puppy-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 8px 12px;
+  color: var(--ink);
+  background: #fffaf1;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.puppy-card-content {
+  padding: 20px 21px 22px;
+}
+
+.puppy-card-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.puppy-card-title h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 25px;
+  letter-spacing: -0.5px;
+}
+
+.puppy-age {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.puppy-card-content > p {
+  margin: 5px 0 17px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.puppy-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--caramel);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.puppy-card-link span {
+  transition: transform 160ms ease;
+}
+
+.puppy-card-link:hover span {
+  transform: translate(3px, -2px);
+}
+
+@media (max-width: 600px) {
+  .puppy-card-image-wrap {
+    height: 235px;
+  }
+}

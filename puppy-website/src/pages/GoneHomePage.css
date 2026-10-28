@@ -1,0 +1,305 @@
+@import '../components/PuppyCard.css';
+
+.gone-home-page {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+.gone-home-hero {
+  min-height: 390px;
+  padding: 63px 24px 55px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(#ead8bd 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--cream);
+}
+
+.gone-home-hero > .eyebrow,
+.gone-home-hero h1,
+.gone-home-hero > p:last-of-type,
+.gone-home-hero .button {
+  position: relative;
+  z-index: 1;
+}
+
+.gone-home-hero h1 {
+  margin: 11px 0 14px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 84px);
+  font-weight: 800;
+  letter-spacing: -3.6px;
+  line-height: 0.99;
+}
+
+.gone-home-hero h1 span {
+  color: var(--caramel);
+}
+
+.gone-home-hero > p:last-of-type {
+  max-width: 570px;
+  margin: 0 auto 23px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.gone-home-hero .button {
+  min-height: 49px;
+}
+
+.gone-home-doodle {
+  position: absolute;
+  color: #d99751;
+  font-family: var(--font-hand);
+}
+
+.gone-home-doodle-left {
+  top: 31%;
+  left: 15%;
+  font-size: 66px;
+  transform: rotate(-15deg);
+}
+
+.gone-home-doodle-right {
+  right: 15%;
+  bottom: 23%;
+  font-size: 47px;
+}
+
+.gone-home-gallery {
+  width: min(100% - 72px, 1200px);
+  margin: 0 auto;
+  padding: 78px 0 92px;
+}
+
+.gone-home-gallery-heading {
+  margin-bottom: 32px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.gone-home-gallery-heading h2 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 53px);
+  font-weight: 800;
+  letter-spacing: -1.7px;
+  line-height: 1.05;
+}
+
+.gone-home-gallery-heading > p {
+  max-width: 360px;
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.gone-home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.gone-home-card .puppy-card-image-wrap {
+  height: 255px;
+}
+
+.gone-home-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gone-home-badge > span {
+  color: var(--caramel);
+  font-size: 14px;
+}
+
+.gone-home-card .puppy-card-title {
+  align-items: center;
+}
+
+.gone-home-card .puppy-card-title h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 25px;
+  letter-spacing: -0.5px;
+}
+
+.adoption-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #39734b;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.adoption-status > span {
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #64a571;
+  border-radius: 50%;
+  font-size: 10px;
+}
+
+.gone-home-card .puppy-card-content > p {
+  margin-bottom: 15px;
+}
+
+.gone-home-cta {
+  padding: 67px 24px 75px;
+  text-align: center;
+  background:
+    radial-gradient(#ead8bd 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--cream);
+}
+
+.gone-home-cta > span {
+  display: block;
+  margin-bottom: 11px;
+  font-size: 30px;
+}
+
+.gone-home-cta h2 {
+  max-width: 640px;
+  margin: 9px auto 23px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(35px, 5vw, 51px);
+  font-weight: 800;
+  letter-spacing: -1.6px;
+  line-height: 1.05;
+}
+
+@media (max-width: 900px) {
+  .gone-home-gallery {
+    width: min(100% - 48px, 760px);
+  }
+
+  .gone-home-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .gone-home-card .puppy-card-image-wrap {
+    height: 235px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gone-home-hero {
+    min-height: 350px;
+    padding: 54px 20px 46px;
+  }
+
+  .gone-home-hero h1 {
+    font-size: clamp(49px, 12vw, 67px);
+    letter-spacing: -2.7px;
+  }
+
+  .gone-home-hero > p:last-of-type {
+    max-width: 420px;
+    font-size: 14px;
+  }
+
+  .gone-home-doodle-left {
+    top: 8%;
+    left: 5%;
+    font-size: 40px;
+  }
+
+  .gone-home-doodle-right {
+    right: 5%;
+    bottom: 9%;
+    font-size: 33px;
+  }
+
+  .gone-home-gallery {
+    width: calc(100% - 36px);
+    padding: 63px 0 68px;
+  }
+
+  .gone-home-gallery-heading {
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .gone-home-gallery-heading h2 {
+    font-size: 40px;
+    letter-spacing: -1.2px;
+  }
+
+  .gone-home-gallery-heading > p {
+    margin-top: 10px;
+  }
+
+  .gone-home-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .gone-home-card {
+    display: grid;
+    grid-template-columns: minmax(125px, 0.8fr) 1fr;
+    align-items: center;
+  }
+
+  .gone-home-card .puppy-card-image-wrap {
+    height: 100%;
+    min-height: 185px;
+  }
+
+  .gone-home-card .puppy-card-content {
+    padding: 16px 14px;
+  }
+
+  .gone-home-card .puppy-card-title {
+    display: block;
+  }
+
+  .gone-home-card .puppy-card-title h2 {
+    font-size: 22px;
+  }
+
+  .adoption-status {
+    margin-top: 5px;
+  }
+
+  .gone-home-card .puppy-card-content > p {
+    margin: 7px 0 12px;
+    font-size: 12px;
+  }
+
+  .gone-home-card .puppy-card-link {
+    font-size: 12px;
+  }
+
+  .gone-home-cta {
+    padding: 59px 20px 65px;
+  }
+
+  .gone-home-cta h2 {
+    max-width: 440px;
+    font-size: 39px;
+    letter-spacing: -1.2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .gone-home-card {
+    grid-template-columns: minmax(110px, 0.75fr) 1fr;
+  }
+}

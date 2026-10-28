@@ -1,0 +1,10 @@
+.home-page {
+  background:
+    radial-gradient(ellipse at 82% 69%, rgb(255 235 198 / 54%), transparent 34%),
+    var(--cream);
+}
+
+.home-page main {
+  overflow: hidden;
+  background: transparent;
+}

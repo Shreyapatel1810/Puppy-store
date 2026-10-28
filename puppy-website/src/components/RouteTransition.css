@@ -1,0 +1,66 @@
+.route-transition {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.route-transition--exiting {
+  animation: route-slide-out 240ms cubic-bezier(0.55, 0, 0.8, 0.45) both;
+  pointer-events: none;
+}
+
+.route-transition--entering {
+  animation: route-slide-in 460ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.route-transition--back.route-transition--exiting {
+  animation-name: route-slide-out-back;
+}
+
+.route-transition--back.route-transition--entering {
+  animation-name: route-slide-in-back;
+}
+
+@keyframes route-slide-in {
+  from {
+    opacity: 0.72;
+    transform: translate3d(5vw, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes route-slide-out {
+  to {
+    opacity: 0.72;
+    transform: translate3d(-4vw, 0, 0);
+  }
+}
+
+@keyframes route-slide-in-back {
+  from {
+    opacity: 0.72;
+    transform: translate3d(-5vw, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes route-slide-out-back {
+  to {
+    opacity: 0.72;
+    transform: translate3d(4vw, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-transition--exiting,
+  .route-transition--entering {
+    animation: none;
+  }
+}

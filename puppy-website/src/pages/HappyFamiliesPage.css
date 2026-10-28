@@ -1,0 +1,500 @@
+.happy-families-page {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+.families-hero {
+  min-height: 410px;
+  padding: 75px 24px 62px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background:
+    radial-gradient(#ead8bd 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--cream);
+}
+
+.families-hero > .eyebrow,
+.families-hero h1,
+.families-hero-description,
+.families-scroll-link {
+  position: relative;
+  z-index: 1;
+}
+
+.families-hero h1 {
+  margin: 12px 0 17px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 88px);
+  font-weight: 800;
+  letter-spacing: -3.8px;
+  line-height: 0.99;
+}
+
+.families-hero h1 span {
+  color: var(--caramel);
+}
+
+.families-hero-description {
+  max-width: 580px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.families-hero-doodle {
+  position: absolute;
+  color: #d99751;
+  font-family: var(--font-hand);
+}
+
+.families-doodle-left {
+  top: 34%;
+  left: 14%;
+  font-size: 70px;
+  transform: rotate(-14deg);
+}
+
+.families-doodle-right {
+  right: 14%;
+  bottom: 26%;
+  font-size: 52px;
+}
+
+.families-scroll-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 21px;
+  color: var(--caramel);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.families-gallery-section {
+  width: min(100% - 72px, 1200px);
+  margin: 0 auto;
+  padding: 83px 0 88px;
+}
+
+.families-section-heading {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.families-section-heading h2,
+.family-testimonials-heading h2,
+.families-cta h2 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1.04;
+}
+
+.families-section-heading > p {
+  max-width: 380px;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.family-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 225px;
+  grid-auto-flow: dense;
+  gap: 18px;
+}
+
+.family-moment {
+  min-width: 0;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #e8dccb;
+  border: 5px solid #fffaf2;
+  border-radius: 22px;
+  box-shadow: 0 8px 24px rgb(66 43 26 / 8%);
+}
+
+.family-moment::after {
+  position: absolute;
+  z-index: 0;
+  inset: 30% 0 0;
+  content: '';
+  background: linear-gradient(transparent, rgb(29 22 17 / 72%));
+  pointer-events: none;
+}
+
+.family-moment img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 450ms ease;
+}
+
+.family-moment:hover img {
+  transform: scale(1.05);
+}
+
+.family-moment figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 16px;
+  bottom: 17px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff;
+}
+
+.family-moment figcaption strong,
+.family-moment figcaption small {
+  display: block;
+}
+
+.family-moment figcaption strong {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.family-moment figcaption small {
+  margin-top: 3px;
+  color: rgb(255 255 255 / 84%);
+  font-size: 11px;
+}
+
+.moment-heart {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--caramel);
+  background: #fffaf2;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.family-moment-tall {
+  grid-row: span 2;
+}
+
+.family-moment-wide {
+  grid-column: span 2;
+}
+
+.gallery-note {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-family: var(--font-hand);
+  font-size: 17px;
+  text-align: center;
+}
+
+.gallery-note span {
+  color: var(--caramel);
+}
+
+.family-testimonials {
+  padding: 83px 36px 92px;
+  background: #f5eddf;
+}
+
+.family-testimonials-heading {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.family-testimonials-heading h2 {
+  font-size: clamp(37px, 5vw, 53px);
+}
+
+.family-testimonials-heading > p:last-child {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.family-testimonial-grid {
+  width: min(100%, 1160px);
+  margin: 38px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.family-testimonial {
+  min-height: 255px;
+  margin: 0;
+  padding: 25px 24px 22px;
+  position: relative;
+  background: #fffaf2;
+  border: 1px solid #eee3d2;
+  border-radius: 20px;
+}
+
+.testimonial-stars {
+  color: #d78a37;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.testimonial-quote-mark {
+  position: absolute;
+  top: 37px;
+  right: 20px;
+  color: #edd9ba;
+  font-family: var(--font-display);
+  font-size: 68px;
+  line-height: 1;
+}
+
+.family-testimonial > p {
+  min-height: 100px;
+  margin: 21px 0 22px;
+  position: relative;
+  color: #51443b;
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.family-testimonial footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.testimonial-avatar {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #bd7442;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.testimonial-avatar-2 {
+  background: #758b61;
+}
+
+.testimonial-avatar-3 {
+  background: #997597;
+}
+
+.family-testimonial footer strong,
+.family-testimonial footer small {
+  display: block;
+}
+
+.family-testimonial footer strong {
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.family-testimonial footer small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.families-cta {
+  padding: 76px 24px 82px;
+  text-align: center;
+  background: var(--cream);
+}
+
+.families-cta > span {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 30px;
+}
+
+.families-cta h2 {
+  max-width: 650px;
+  margin: 9px auto 25px;
+  font-size: clamp(36px, 5vw, 53px);
+}
+
+@media (max-width: 900px) {
+  .families-doodle-left {
+    left: 7%;
+  }
+
+  .families-doodle-right {
+    right: 7%;
+  }
+
+  .families-gallery-section {
+    width: min(100% - 48px, 760px);
+  }
+
+  .family-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 230px;
+    gap: 15px;
+  }
+
+  .family-moment-tall {
+    grid-row: span 2;
+  }
+
+  .family-testimonial-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .family-testimonial {
+    min-height: 0;
+  }
+
+  .family-testimonial > p {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .families-hero {
+    min-height: 350px;
+    padding: 63px 22px 46px;
+  }
+
+  .families-hero h1 {
+    font-size: clamp(48px, 12vw, 68px);
+    letter-spacing: -2.6px;
+  }
+
+  .families-hero-description {
+    max-width: 420px;
+    font-size: 14px;
+  }
+
+  .families-doodle-left {
+    top: 10%;
+    left: 4%;
+    font-size: 43px;
+  }
+
+  .families-doodle-right {
+    right: 5%;
+    bottom: 12%;
+    font-size: 34px;
+  }
+
+  .families-gallery-section {
+    width: calc(100% - 36px);
+    padding: 63px 0 68px;
+  }
+
+  .families-section-heading {
+    display: block;
+    margin-bottom: 23px;
+  }
+
+  .families-section-heading h2 {
+    font-size: 42px;
+  }
+
+  .families-section-heading > p {
+    margin-top: 11px;
+  }
+
+  .family-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 185px;
+    gap: 11px;
+  }
+
+  .family-moment {
+    border-width: 3px;
+    border-radius: 17px;
+  }
+
+  .family-moment figcaption {
+    right: 10px;
+    bottom: 11px;
+    left: 10px;
+    gap: 7px;
+  }
+
+  .family-moment figcaption strong {
+    font-size: 15px;
+  }
+
+  .family-moment figcaption small {
+    font-size: 9px;
+  }
+
+  .moment-heart {
+    width: 27px;
+    height: 27px;
+    font-size: 16px;
+  }
+
+  .family-testimonials {
+    padding: 65px 20px 70px;
+  }
+
+  .family-testimonials-heading h2 {
+    font-size: 40px;
+    letter-spacing: -1.3px;
+  }
+
+  .family-testimonial-grid {
+    gap: 13px;
+    margin-top: 28px;
+  }
+
+  .family-testimonial {
+    padding: 21px 19px;
+  }
+
+  .family-testimonial > p {
+    font-size: 15px;
+  }
+
+  .families-cta {
+    padding: 61px 20px 67px;
+  }
+
+  .families-cta h2 {
+    font-size: 39px;
+    letter-spacing: -1.3px;
+  }
+}
+
+@media (max-width: 380px) {
+  .family-gallery {
+    grid-auto-rows: 160px;
+    gap: 8px;
+  }
+
+  .family-moment figcaption small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .family-moment img {
+    transition: none;
+  }
+}

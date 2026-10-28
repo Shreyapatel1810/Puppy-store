@@ -1,0 +1,11 @@
+.about-page .about-section {
+  min-height: 610px;
+  display: grid;
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  .about-page .about-section {
+    min-height: 0;
+  }
+}
