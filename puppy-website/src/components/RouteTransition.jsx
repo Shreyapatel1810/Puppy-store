@@ -1,13 +1,16 @@
 import { cloneElement, useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigationType } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { puppies } from '../data/puppies.js'
 import './RouteTransition.css'
+
+const DOOR_CLOSE_DURATION = 520
+const DOOR_OPEN_DURATION = 1250
+const transitionPuppy = puppies[0]
 
 function RouteTransition({ children }) {
   const location = useLocation()
-  const navigationType = useNavigationType()
   const [displayedLocation, setDisplayedLocation] = useState(location)
   const [phase, setPhase] = useState('idle')
-  const direction = navigationType === 'POP' ? 'back' : 'forward'
   const transitionLocation = displayedLocation.pathname === location.pathname
     ? location
     : displayedLocation
@@ -29,19 +32,19 @@ function RouteTransition({ children }) {
       exitTimer = window.setTimeout(() => {
         setDisplayedLocation(location)
         setPhase('entering')
-      }, 240)
+      }, DOOR_CLOSE_DURATION)
     })
 
     return () => {
       window.cancelAnimationFrame(exitFrame)
       if (exitTimer) window.clearTimeout(exitTimer)
     }
-  }, [displayedLocation.pathname, location, navigationType])
+  }, [displayedLocation.pathname, location])
 
   useEffect(() => {
     if (phase !== 'entering') return undefined
 
-    const enterTimer = window.setTimeout(() => setPhase('idle'), 460)
+    const enterTimer = window.setTimeout(() => setPhase('idle'), DOOR_OPEN_DURATION)
     return () => window.clearTimeout(enterTimer)
   }, [phase])
 
@@ -69,11 +72,41 @@ function RouteTransition({ children }) {
   const routeContent = cloneElement(children, { location: transitionLocation })
 
   return (
-    <div
-      className={`route-transition route-transition--${phase} route-transition--${direction}`}
-    >
-      {routeContent}
-    </div>
+    <>
+      <div className={`route-transition route-transition--${phase}`}>
+        {routeContent}
+      </div>
+      {phase !== 'idle' && (
+        <div className={`door-transition door-transition--${phase}`} aria-hidden="true">
+          <div className="door-panel door-panel--left">
+            {phase === 'exiting' && (
+              <div className="door-puppy-plaque">
+                <span className="door-puppy-name">Meet {transitionPuppy.name}</span>
+                <img src={transitionPuppy.image} alt="" />
+                <span className="door-puppy-caption">A little love awaits</span>
+              </div>
+            )}
+          </div>
+          <div className="door-panel door-panel--right">
+            {phase === 'exiting' && (
+              <div className="door-puppy-plaque door-puppy-plaque--right">
+                <span className="door-puppy-name">Meet {transitionPuppy.name}</span>
+                <img src={transitionPuppy.image} alt="" />
+                <span className="door-puppy-caption">A little love awaits</span>
+              </div>
+            )}
+          </div>
+          {phase === 'entering' && (
+            <div className="door-puppy-runner">
+              <span className="door-puppy-trail door-puppy-trail--one" aria-hidden="true">🐾</span>
+              <span className="door-puppy-trail door-puppy-trail--two" aria-hidden="true">🐾</span>
+              <img src={transitionPuppy.image} alt="" />
+              <span className="door-puppy-runner-name">{transitionPuppy.name}</span>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   )
 }
 

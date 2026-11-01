@@ -126,23 +126,6 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="contact-map-section" aria-labelledby="contact-map-heading">
-        <div className="contact-map-heading">
-          <div>
-            <p className="eyebrow">Come say hello</p>
-            <h2 id="contact-map-heading">Find us in Dubai</h2>
-          </div>
-          <p>Visits are arranged by appointment. Get in touch and we’ll share the details.</p>
-        </div>
-        <div className="contact-map-frame">
-          <iframe
-            title="Map showing Dubai, United Arab Emirates"
-            src="https://maps.google.com/maps?q=Dubai%2C%20United%20Arab%20Emirates&t=&z=11&ie=UTF8&iwloc=&output=embed"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </section>
     </SiteLayout>
   )
 }

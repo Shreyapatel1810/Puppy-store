@@ -3,64 +3,321 @@
   min-height: 100vh;
 }
 
-.route-transition--exiting {
-  animation: route-slide-out 240ms cubic-bezier(0.55, 0, 0.8, 0.45) both;
+.route-transition--exiting,
+.route-transition--entering {
   pointer-events: none;
 }
 
-.route-transition--entering {
-  animation: route-slide-in 460ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+.door-transition {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: clip;
+  perspective: 1400px;
+  pointer-events: auto;
 }
 
-.route-transition--back.route-transition--exiting {
-  animation-name: route-slide-out-back;
+.door-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(75 37 19 / 42%);
+  box-shadow:
+    inset 0 0 0 8px rgb(255 230 193 / 36%),
+    inset 0 0 0 11px rgb(93 46 25 / 30%),
+    inset 0 0 45px rgb(73 35 17 / 25%);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
-.route-transition--back.route-transition--entering {
-  animation-name: route-slide-in-back;
+.door-panel--left {
+  background:
+    radial-gradient(circle at 94% 50%, #f5dda8 0 4px, #b37b3c 5px, #5d3d22 7px, transparent 8px),
+    linear-gradient(90deg, rgb(255 255 255 / 11%), transparent 14%, transparent 86%, rgb(71 34 15 / 15%)),
+    repeating-linear-gradient(90deg, transparent 0 34px, rgb(94 48 24 / 5%) 35px, transparent 37px),
+    linear-gradient(145deg, #c98550 0%, #a95d31 48%, #8e4828 100%);
 }
 
-@keyframes route-slide-in {
+.door-panel--right {
+  background:
+    radial-gradient(circle at 6% 50%, #f5dda8 0 4px, #b37b3c 5px, #5d3d22 7px, transparent 8px),
+    linear-gradient(90deg, rgb(255 255 255 / 11%), transparent 14%, transparent 86%, rgb(71 34 15 / 15%)),
+    repeating-linear-gradient(90deg, transparent 0 34px, rgb(94 48 24 / 5%) 35px, transparent 37px),
+    linear-gradient(145deg, #c98550 0%, #a95d31 48%, #8e4828 100%);
+}
+
+.door-panel::before,
+.door-panel::after {
+  position: absolute;
+  right: 22px;
+  left: 22px;
+  content: '';
+  border: 1px solid rgb(255 225 187 / 34%);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 5px rgb(87 42 21 / 13%);
+  z-index: 0;
+}
+
+.door-panel::before {
+  top: 8%;
+  bottom: 52%;
+}
+
+.door-panel::after {
+  top: 52%;
+  bottom: 8%;
+}
+
+.door-panel--left {
+  transform-origin: left center;
+}
+
+.door-panel--right {
+  transform-origin: right center;
+}
+
+.door-panel--left::after {
+  right: 23px;
+}
+
+.door-panel--right::after {
+  left: 23px;
+}
+
+.door-puppy-plaque {
+  width: clamp(110px, 16vw, 190px);
+  padding: clamp(6px, 1vw, 11px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: clamp(5px, 0.8vw, 10px);
+  color: #57361f;
+  background: linear-gradient(145deg, #fff8e9, #e8c99e);
+  border: 2px solid #e8c99e;
+  border-radius: 48% 48% 13px 13px;
+  box-shadow: 0 5px 15px rgb(53 28 13 / 27%), inset 0 0 0 2px #fff9ec;
+  transform: translate(-50%, -50%) translateZ(2px);
+  z-index: 1;
+}
+
+.door-puppy-plaque img {
+  width: 100%;
+  aspect-ratio: 0.88;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid #fff9ec;
+  border-radius: 45% 45% 9px 9px;
+}
+
+.door-puppy-plaque--right {
+  left: 50%;
+}
+
+.door-puppy-name,
+.door-puppy-caption {
+  text-align: center;
+}
+
+.door-puppy-name {
+  font-family: var(--font-display);
+  font-size: clamp(12px, 1.35vw, 18px);
+  font-weight: 800;
+}
+
+.door-puppy-caption {
+  color: #76573b;
+  font-family: var(--font-hand);
+  font-size: clamp(8px, 0.8vw, 11px);
+}
+
+.door-transition--exiting .door-panel--left {
+  animation: door-close-left 520ms cubic-bezier(0.55, 0, 0.8, 0.45) both;
+}
+
+.door-transition--exiting .door-panel--right {
+  animation: door-close-right 520ms cubic-bezier(0.55, 0, 0.8, 0.45) both;
+}
+
+.door-transition--entering .door-panel--left {
+  animation: door-open-left 900ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.door-transition--entering .door-panel--right {
+  animation: door-open-right 900ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.door-puppy-runner {
+  width: clamp(112px, 14vw, 174px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  z-index: 2;
+  opacity: 0;
+  animation: puppy-run-through-door 1150ms cubic-bezier(0.35, 0, 0.65, 1) 100ms both;
+}
+
+.door-puppy-runner img {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  object-fit: cover;
+  border: 5px solid #fff9ec;
+  border-radius: 50%;
+  box-shadow: 0 7px 22px rgb(52 30 17 / 30%);
+}
+
+.door-puppy-runner-name {
+  padding: 4px 11px;
+  color: #57361f;
+  background: #fff8e9;
+  border: 1px solid #e8c99e;
+  border-radius: 999px;
+  box-shadow: 0 3px 9px rgb(52 30 17 / 15%);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.door-puppy-trail {
+  position: absolute;
+  left: -12%;
+  color: #fff4dc;
+  font-size: clamp(20px, 3vw, 34px);
+  opacity: 0;
+  animation: puppy-paw-trail 500ms ease-out both;
+}
+
+.door-puppy-trail--one {
+  top: 34%;
+  animation-delay: 330ms;
+}
+
+.door-puppy-trail--two {
+  top: 55%;
+  animation-delay: 600ms;
+}
+
+@keyframes door-close-left {
   from {
-    opacity: 0.72;
-    transform: translate3d(5vw, 0, 0);
+    transform: rotateY(-88deg);
   }
 
   to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: rotateY(0);
   }
 }
 
-@keyframes route-slide-out {
-  to {
-    opacity: 0.72;
-    transform: translate3d(-4vw, 0, 0);
-  }
-}
-
-@keyframes route-slide-in-back {
+@keyframes door-close-right {
   from {
-    opacity: 0.72;
-    transform: translate3d(-5vw, 0, 0);
+    transform: rotateY(88deg);
   }
 
   to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: rotateY(0);
   }
 }
 
-@keyframes route-slide-out-back {
+@keyframes door-open-left {
+  from {
+    transform: rotateY(0);
+  }
+
   to {
-    opacity: 0.72;
-    transform: translate3d(4vw, 0, 0);
+    transform: rotateY(-88deg);
+  }
+}
+
+@keyframes door-open-right {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(88deg);
+  }
+}
+
+@keyframes puppy-run-through-door {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(-6vw) translateY(0) scale(0.72) rotate(-8deg);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(-4vw) translateY(-17px) scale(0.9) rotate(5deg);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(5vw) translateY(0) scale(1) rotate(-5deg);
+  }
+
+  39% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(19vw) translateY(-18px) scale(0.98) rotate(5deg);
+  }
+
+  53% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(34vw) translateY(0) scale(0.94) rotate(-4deg);
+  }
+
+  67% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(49vw) translateY(-15px) scale(0.9) rotate(4deg);
+  }
+
+  82% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(64vw) translateY(0) scale(0.84) rotate(-3deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(100vw) translateY(-5px) scale(0.72) rotate(2deg);
+  }
+}
+
+@keyframes puppy-paw-trail {
+  0% {
+    opacity: 0;
+    transform: translate(-10px, 9px) scale(0.65) rotate(-18deg);
+  }
+
+  30% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-37px, -15px) scale(1.05) rotate(-28deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .route-transition--exiting,
-  .route-transition--entering {
-    animation: none;
+  .door-transition {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .door-puppy-plaque {
+    width: clamp(100px, 34vw, 150px);
+  }
+
+  .door-puppy-runner {
+    width: clamp(94px, 25vw, 125px);
+  }
+
+  .door-puppy-runner-name {
+    font-size: 11px;
   }
 }

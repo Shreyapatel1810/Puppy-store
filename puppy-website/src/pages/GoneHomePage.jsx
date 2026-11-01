@@ -1,3 +1,4 @@
+import { forwardRef, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import SiteLayout from '../components/SiteLayout.jsx'
 import './GoneHomePage.css'
@@ -41,28 +42,53 @@ const adoptedPuppies = [
   },
 ]
 
-function AdoptedPuppyCard({ puppy }) {
-  return (
-    <article className="puppy-card gone-home-card">
-      <div className="puppy-card-image-wrap">
-        <img className="puppy-card-image" src={puppy.image} alt={puppy.alt} loading="lazy" />
-        <span className="puppy-badge gone-home-badge"><span aria-hidden="true">♡</span> Gone home</span>
+const AdoptedPuppyCard = forwardRef(({ puppy, style }, ref) => (
+  <article ref={ref} className="puppy-card gone-home-card" style={style}>
+    <div className="puppy-card-image-wrap">
+      <img className="puppy-card-image" src={puppy.image} alt={puppy.alt} loading="lazy" />
+      <span className="puppy-badge gone-home-badge"><span aria-hidden="true">♡</span> Gone home</span>
+    </div>
+    <div className="puppy-card-content">
+      <div className="puppy-card-title">
+        <h2>{puppy.name}</h2>
+        <span className="adoption-status"><span aria-hidden="true">✓</span> Adopted</span>
       </div>
-      <div className="puppy-card-content">
-        <div className="puppy-card-title">
-          <h2>{puppy.name}</h2>
-          <span className="adoption-status"><span aria-hidden="true">✓</span> Adopted</span>
-        </div>
-        <p>{puppy.breed}</p>
-        <Link className="puppy-card-link" to="/happy-families">
-          Happy tails <span aria-hidden="true">↗</span>
-        </Link>
-      </div>
-    </article>
-  )
-}
+      <p>{puppy.breed}</p>
+      <Link className="puppy-card-link" to="/happy-families">
+        Happy tails <span aria-hidden="true">↗</span>
+      </Link>
+    </div>
+  </article>
+))
+
+AdoptedPuppyCard.displayName = 'AdoptedPuppyCard'
 
 function GoneHomePage() {
+  const cardRefs = useRef([])
+
+  useEffect(() => {
+    const cards = cardRefs.current.filter(Boolean)
+    if (!cards.length) return undefined
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      cards.forEach((card) => card.classList.add('is-visible'))
+      return undefined
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+
+        entry.target.classList.add('is-visible')
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' })
+
+    cards.forEach((card) => observer.observe(card))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <SiteLayout className="gone-home-page" title="Gone Home | PawFect Pups">
       <section className="gone-home-hero">
@@ -86,8 +112,13 @@ function GoneHomePage() {
         </div>
 
         <div className="gone-home-grid">
-          {adoptedPuppies.map((puppy) => (
-            <AdoptedPuppyCard key={puppy.name} puppy={puppy} />
+          {adoptedPuppies.map((puppy, index) => (
+            <AdoptedPuppyCard
+              key={puppy.name}
+              puppy={puppy}
+              style={{ '--card-delay': `${index * 180}ms` }}
+              ref={(element) => { cardRefs.current[index] = element }}
+            />
           ))}
         </div>
       </section>

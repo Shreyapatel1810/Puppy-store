@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SiteLayout from '../components/SiteLayout.jsx'
 import { formatPuppyPrice, puppies } from '../data/puppies.js'
@@ -6,9 +6,37 @@ import './PuppiesPage.css'
 
 const categories = ['All puppies', 'Toy', 'Small', 'Medium', 'Large']
 
-function PuppyListingCard({ puppy }) {
+function PuppyListingCard({ puppy, index }) {
+  const cardRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(() => (
+    typeof IntersectionObserver === 'undefined'
+    || (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  ))
+
+  useEffect(() => {
+    if (isVisible) return undefined
+
+    const card = cardRef.current
+    if (!card) return undefined
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+
+      setIsVisible(true)
+      observer.unobserve(entry.target)
+    }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' })
+
+    observer.observe(card)
+    return () => observer.disconnect()
+  }, [isVisible])
+
   return (
-    <article className="listing-card">
+    <article
+      className={`listing-card${isVisible ? ' is-visible' : ''}`}
+      ref={cardRef}
+      style={{ '--listing-reveal-delay': `${(index % 3) * 110}ms` }}
+      inert={!isVisible}
+    >
       <div className="listing-card-image-wrap">
         <img src={puppy.image} alt={`${puppy.name}, ${puppy.breed} puppy`} loading="lazy" />
         <span className={`availability-badge availability-${puppy.availability.toLowerCase().replaceAll(' ', '-')}`}>
@@ -71,8 +99,8 @@ function PuppiesPage() {
 
           {filteredPuppies.length > 0 ? (
             <div className="listing-grid">
-              {filteredPuppies.map((puppy) => (
-                <PuppyListingCard key={puppy.id} puppy={puppy} />
+              {filteredPuppies.map((puppy, index) => (
+                <PuppyListingCard key={puppy.id} puppy={puppy} index={index} />
               ))}
             </div>
           ) : (

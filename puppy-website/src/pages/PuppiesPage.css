@@ -129,7 +129,18 @@
   border: 1px solid #eee6d9;
   border-radius: 23px;
   box-shadow: 0 8px 26px rgb(66 43 26 / 5%);
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  opacity: 0;
+  transform: translate3d(0, 34px, 0) scale(0.985);
+  transition:
+    opacity 650ms ease,
+    transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    box-shadow 180ms ease;
+  transition-delay: var(--listing-reveal-delay, 0ms);
+}
+
+.listing-card.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 .listing-card:hover {
@@ -405,4 +416,13 @@
     font-size: 11px;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listing-card,
+  .listing-card.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 180ms ease;
+  }
 }

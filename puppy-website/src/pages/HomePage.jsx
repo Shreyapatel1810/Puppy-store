@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import SiteLayout from '../components/SiteLayout.jsx'
 import './HomePage.css'
@@ -11,6 +12,31 @@ const puppyPhotos = {
 }
 
 function HeroSection() {
+  const photoRefs = useRef([])
+
+  useEffect(() => {
+    const photos = photoRefs.current.filter(Boolean)
+    if (!photos.length) return undefined
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      photos.forEach((photo) => photo.classList.add('is-visible'))
+      return undefined
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+
+        entry.target.classList.add('is-visible')
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.25, rootMargin: '0px 0px -8% 0px' })
+
+    photos.forEach((photo) => observer.observe(photo))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="hero">
       <div className="hero-copy">
@@ -31,19 +57,19 @@ function HeroSection() {
       </div>
 
       <div className="hero-art" aria-label="Some of our happy puppies">
-        <div className="hero-photo hero-photo--one">
+        <div className="hero-photo hero-photo--one" ref={(element) => { photoRefs.current[0] = element }}>
           <img src={puppyPhotos.about} alt="Two happy dogs spending time together" />
         </div>
-        <div className="hero-photo hero-photo--two">
+        <div className="hero-photo hero-photo--two" ref={(element) => { photoRefs.current[1] = element }}>
           <img src={puppyPhotos.coco} alt="A puppy looking for a family" />
         </div>
-        <div className="hero-photo hero-photo--center">
+        <div className="hero-photo hero-photo--center" ref={(element) => { photoRefs.current[2] = element }}>
           <img src={puppyPhotos.hero} alt="A fluffy puppy ready to meet its new family" />
         </div>
-        <div className="hero-photo hero-photo--four">
+        <div className="hero-photo hero-photo--four" ref={(element) => { photoRefs.current[3] = element }}>
           <img src={puppyPhotos.oliver} alt="A sweet puppy resting" />
         </div>
-        <div className="hero-photo hero-photo--five">
+        <div className="hero-photo hero-photo--five" ref={(element) => { photoRefs.current[4] = element }}>
           <img src={puppyPhotos.bella} alt="A golden puppy enjoying the outdoors" />
         </div>
         <span className="hero-doodle doodle-heart" aria-hidden="true">♡</span>
